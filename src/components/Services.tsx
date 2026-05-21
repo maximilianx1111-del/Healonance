@@ -13,7 +13,8 @@ export default function Services() {
       description: t('services.reikiDesc'),
       icon: Flower2,
       duration: '60 Min',
-      price: '$90',
+      originalPrice: '$100',
+      price: '$50',
     },
     {
       id: 'theta',
@@ -21,7 +22,8 @@ export default function Services() {
       description: t('services.thetaDesc'),
       icon: Sparkles,
       duration: '75 Min',
-      price: '$120',
+      originalPrice: '$100',
+      price: '$50',
     },
     {
       id: 'body-code',
@@ -29,7 +31,8 @@ export default function Services() {
       description: t('services.bodyCodeDesc'),
       icon: Activity,
       duration: '60 Min',
-      price: '$110',
+      originalPrice: '$100',
+      price: '$50',
     },
   ];
 
@@ -95,8 +98,12 @@ export default function Services() {
                       <div className="text-sm font-medium text-sage-500 uppercase tracking-widest">
                         {service.duration}
                       </div>
-                      <div className="text-xl font-serif text-sage-900">
-                        {service.price}
+                      <div className="flex flex-col items-end justify-center">
+                        <span className="text-sm text-gray-400 line-through mb-1">{service.originalPrice}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="bg-sage-100 text-sage-800 text-xs px-2 py-0.5 rounded-full font-sans font-medium">-50%</span>
+                          <span className="text-xl font-serif text-sage-900">{service.price}</span>
+                        </div>
                       </div>
                     </div>
                     <div className="mt-6 pt-6 opacity-0 group-hover:opacity-100 transition-all duration-700 h-0 group-hover:h-auto overflow-hidden translate-y-4 group-hover:translate-y-0">

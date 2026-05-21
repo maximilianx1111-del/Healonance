@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
+import logoUrl from '../assets/images/healonace_logo_1779369184258.png';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,8 +42,8 @@ export default function Header() {
       }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        <Link to="/" className="text-2xl font-serif font-semibold tracking-widest text-sage-900">
-          HEALONACE
+        <Link to="/" className="flex items-center">
+          <img src={logoUrl} alt="Healonace Logo" className="h-12 md:h-14 w-auto drop-shadow-sm mix-blend-multiply" />
         </Link>
 
         {/* Desktop Nav */}

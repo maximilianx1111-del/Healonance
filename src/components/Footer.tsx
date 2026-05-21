@@ -1,6 +1,7 @@
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import logoUrl from '../assets/images/healonace_logo_1779369184258.png';
 
 export default function Footer() {
   const { t, dir } = useLanguage();
@@ -10,8 +11,8 @@ export default function Footer() {
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
-            <Link to="/" className="text-3xl font-serif font-semibold tracking-wide text-white mb-6 block">
-              Healonace
+            <Link to="/" className="flex items-center mb-6 bg-white w-fit rounded-xl overflow-hidden p-1">
+              <img src={logoUrl} alt="Healonace Logo" className="h-10 md:h-12 w-auto" />
             </Link>
             <p className="text-sage-200 font-light leading-relaxed mb-6">
               {t('footer.desc')}
