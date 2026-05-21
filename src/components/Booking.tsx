@@ -1,33 +1,27 @@
 import { useState, FormEvent } from 'react';
-import { DayPicker } from 'react-day-picker';
-import { format } from 'date-fns';
 import { motion } from 'motion/react';
 import { MessageCircle } from 'lucide-react';
-import 'react-day-picker/dist/style.css';
 import { useLanguage } from '../context/LanguageContext';
-
-const timeSlots = [
-  '09:00 AM', '10:30 AM', '01:00 PM', '02:30 PM', '04:00 PM'
-];
 
 export default function Booking() {
   const { t, dir } = useLanguage();
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [selectedService, setSelectedService] = useState<string>('reiki');
 
   const handleBookWhatsApp = (e: FormEvent) => {
     e.preventDefault();
-    if (selectedDate && selectedTime) {
-      const dateStr = format(selectedDate, 'MMM d, yyyy');
-      // Prepare localized or english message
-      const message = `Hello, I would like to book a ${selectedService.toUpperCase()} session on ${dateStr} at ${selectedTime}.`;
-      
-      const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "1234567890"; // Please replace with real number in .env
-      const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
-      const url = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
-    }
+    // Prepare localized or english message
+    const serviceName = selectedService === 'reiki' ? t('services.reikiTitle') 
+      : selectedService === 'theta healing' ? t('services.thetaTitle') 
+      : t('services.bodyCodeTitle');
+
+    const message = dir === 'rtl' 
+      ? `مرحباً، أود حجز جلسة ${serviceName}.`
+      : `Hello, I would like to book a ${serviceName} session.`;
+    
+    const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "1234567890"; // Please replace with real number in .env
+    const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
+    const url = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
   };
 
   return (
@@ -83,8 +77,8 @@ export default function Booking() {
               
               {/* Service Selection */}
               <div>
-                <label className="block text-sm font-medium text-sage-800 mb-3 uppercase tracking-wider">{t('booking.selectService')}</label>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <label className="block text-sm font-medium text-sage-800 mb-6 uppercase tracking-wider text-center">{t('booking.selectService')}</label>
+                <div className="grid grid-cols-1 gap-4 max-w-md mx-auto">
                   {['reiki', 'theta healing', 'body code'].map((serviceKey) => {
                     const serviceName = serviceKey === 'reiki' ? t('services.reikiTitle') 
                       : serviceKey === 'theta healing' ? t('services.thetaTitle') 
@@ -95,7 +89,7 @@ export default function Booking() {
                         key={serviceKey}
                         type="button"
                         onClick={() => setSelectedService(serviceKey)}
-                        className={`py-3 px-4 rounded-xl border text-sm font-medium transition-all ${
+                        className={`py-4 px-6 rounded-xl border text-lg font-medium transition-all w-full shadow-sm hover:shadow-md ${
                           selectedService === serviceKey
                             ? 'bg-sage-600 border-sage-600 text-white'
                             : 'bg-transparent border-beige-200 text-charcoal-800 hover:border-sage-400'
@@ -108,65 +102,17 @@ export default function Booking() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {/* Calendar */}
-                <div>
-                  <label className="block text-sm font-medium text-sage-800 mb-3 uppercase tracking-wider">{t('booking.selectDate')}</label>
-                  <div className="border border-beige-200 rounded-2xl p-4 bg-beige-50/50 flex justify-center w-full max-w-[fit-content]" dir="ltr">
-                    <DayPicker
-                      mode="single"
-                      selected={selectedDate}
-                      onSelect={setSelectedDate}
-                      disabled={{ before: new Date() }}
-                      className="font-sans"
-                      modifiersClassNames={{
-                        selected: 'bg-sage-600 text-white hover:bg-sage-700',
-                        today: 'text-sage-600 font-bold'
-                      }}
-                    />
-                  </div>
-                </div>
-
-                {/* Time Slots */}
-                <div>
-                  <label className="block text-sm font-medium text-sage-800 mb-3 uppercase tracking-wider">{t('booking.selectTime')}</label>
-                  {selectedDate ? (
-                    <div className="grid grid-cols-2 gap-3">
-                      {timeSlots.map((time) => (
-                        <button
-                          key={time}
-                          type="button"
-                          onClick={() => setSelectedTime(time)}
-                          className={`py-3 px-4 rounded-xl border text-sm font-medium transition-all ${
-                            selectedTime === time
-                              ? 'bg-sage-600 border-sage-600 text-white'
-                              : 'bg-transparent border-beige-200 text-charcoal-800 hover:border-sage-400'
-                          }`}
-                        >
-                          {time}
-                        </button>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="h-full min-h-[200px] border border-dashed border-beige-300 rounded-2xl flex items-center justify-center bg-beige-50/30 text-charcoal-800/50 text-sm">
-                      {t('booking.selectDateFirst')}
-                    </div>
-                  )}
-                </div>
-              </div>
-
               {/* Submit */}
-              <div className="pt-6 border-t border-beige-100">
+              <div className="pt-8 mt-8 border-t border-beige-100 max-w-md mx-auto">
                 <button
                   type="submit"
-                  disabled={!selectedDate || !selectedTime}
-                  className="w-full py-4 bg-[#25D366] text-white rounded-xl text-lg font-medium hover:bg-[#1ebd5b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                  className="w-full py-4 bg-[#25D366] text-white rounded-xl text-lg font-medium hover:bg-[#1ebd5b] transition-colors flex items-center justify-center gap-3 shadow-md hover:shadow-lg"
                 >
                   <MessageCircle className="w-6 h-6" />
-                  {dir === 'rtl' ? 'تأكيد الحجز عبر واتساب' : 'Book via WhatsApp'}
+                  {dir === 'rtl' ? 'مراسلة عبر واتساب الآن' : 'Message on WhatsApp Now'}
                 </button>
-                <p className="mt-3 text-center text-sm text-charcoal-600 font-light">
-                  {dir === 'rtl' ? 'سيتم تحويلك إلى تطبيق واتساب لتأكيد الموعد.' : 'You will be redirected to WhatsApp to confirm the appointment.'}
+                <p className="mt-4 text-center text-sm text-charcoal-600 font-light">
+                  {dir === 'rtl' ? 'سيتم تحويلك لترتيب موعد الجلسة مباشرة عبر واتساب.' : 'You will be redirected to WhatsApp to arrange your session time.'}
                 </p>
               </div>
             </form>
