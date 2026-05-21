@@ -1,7 +1,7 @@
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import logoUrl from '../assets/images/healonace_logo_1779369184258.png';
+import logoUrl from '../assets/images/logoa.PNG';
 
 export default function Footer() {
   const { t, dir } = useLanguage();
