@@ -65,12 +65,6 @@ export default function Booking() {
                 <h4 className="font-serif text-xl text-sage-800 mb-2">{t('booking.practitioner')}</h4>
                 <p className="text-charcoal-800 font-light whitespace-pre-line">{t('booking.practitionerDesc')}</p>
               </div>
-              <div>
-                <h4 className="font-serif text-xl text-sage-800 mb-2">{t('booking.contact')}</h4>
-                <p className="text-charcoal-800 font-light">
-                  <a href="mailto:hello@healonace.com" className="hover:text-sage-700 transition-colors">hello@healonace.com</a>
-                </p>
-              </div>
             </div>
           </div>
 
@@ -117,6 +111,27 @@ export default function Booking() {
                 <p className="mt-4 text-center text-sm text-charcoal-600 font-light">
                   {dir === 'rtl' ? 'سيتم تحويلك لترتيب موعد الجلسة مباشرة عبر واتساب.' : 'You will be redirected to WhatsApp to arrange your session time.'}
                 </p>
+
+                {/* Contact Section Moved from Info Side */}
+                <div className="mt-10 pt-8 border-t border-beige-100">
+                  <h4 className="font-serif text-xl text-sage-800 mb-5 text-center">{t('booking.contact')}</h4>
+                  <div className="text-charcoal-800 font-light space-y-4 flex flex-col items-center">
+                    <div>
+                      <a href="mailto:info@healonace.com" className="hover:text-sage-700 transition-colors text-lg">info@healonace.com</a>
+                    </div>
+                    <div className="flex flex-col gap-4 mt-2">
+                      <a href="https://wa.me/9647742966777" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 justify-center hover:text-green-600 transition-colors w-max mx-auto">
+                        <span className="text-2xl leading-none">🇮🇶</span>
+                        <span dir="ltr" className="font-medium text-lg">+964 774 296 6777</span>
+                        <span className={`text-xs font-semibold bg-green-100 text-green-700 px-2 py-1 rounded-full ${dir === 'rtl' ? 'mr-2' : 'ml-2'}`}>WhatsApp</span>
+                      </a>
+                      <div className="flex items-center justify-center gap-2 w-max mx-auto">
+                        <span className="text-2xl leading-none">🇬🇧</span>
+                        <span dir="ltr" className="font-medium text-lg">+44 748 278 9910</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </form>
           </div>

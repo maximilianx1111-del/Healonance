@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
-import logoUrl from '../assets/images/logoa.PNG';
+import logoUrl from '../assets/images/logoa.jpeg';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
