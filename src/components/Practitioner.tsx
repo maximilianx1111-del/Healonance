@@ -46,7 +46,7 @@ export default function Practitioner() {
             >
               <img 
                 src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1000&auto=format&fit=crop" 
-                alt="Master Ahmed - Holistic Healer" 
+                alt="Master Adam - Holistic Healer" 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
