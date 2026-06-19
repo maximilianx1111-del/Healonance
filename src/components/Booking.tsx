@@ -18,7 +18,7 @@ export default function Booking() {
       ? `مرحباً، أود حجز جلسة ${serviceName}.`
       : `Hello, I would like to book a ${serviceName} session.`;
     
-    const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "1234567890"; // Please replace with real number in .env
+    const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "9647742966777";
     const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
     const url = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
