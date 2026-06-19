@@ -18,7 +18,8 @@ export default function Booking() {
       ? `مرحباً، أود حجز جلسة ${serviceName}.`
       : `Hello, I would like to book a ${serviceName} session.`;
     
-    const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "9647742966777";
+    // Added specific number directly
+    const whatsappNumber = "9647742966777";
     const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
     const url = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
@@ -66,7 +67,9 @@ export default function Booking() {
               </div>
               <div>
                 <h4 className="font-serif text-xl text-sage-800 mb-2">{t('booking.contact')}</h4>
-                <p className="text-charcoal-800 font-light">hello@healonace.com</p>
+                <p className="text-charcoal-800 font-light">
+                  <a href="mailto:hello@healonace.com" className="hover:text-sage-700 transition-colors">hello@healonace.com</a>
+                </p>
               </div>
             </div>
           </div>
@@ -117,6 +120,7 @@ export default function Booking() {
               </div>
             </form>
           </div>
+
         </div>
       </div>
     </section>
